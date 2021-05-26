@@ -56,4 +56,4 @@ for i in range(len(factors)):
     data = eval('optr.factor' + (factors[i][0]))
     data = standardize_factor_df(data)
     pd.DataFrame(data).to_csv(rootpath+'factors_value\\%d.csv'%i)
-    print('\r%d'%i)
+    print('\r%d'%i,end='')

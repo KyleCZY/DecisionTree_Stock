@@ -89,7 +89,7 @@ def fitness_func(factor_tmp, yizi,RawRet):
     return calma, Retdf
 
 #%%回测单因子多参数
-factorNo = 29
+factorNo = 66
 f = getattr(optr, 'factor' + str(factorNo))
 
 #设置参数，不同因子要修改
@@ -97,18 +97,18 @@ A_list = ['close','close_adj','high_adj','low_adj','open_adj','volume_adj','vwap
 B_list = ['close','close_adj','high_adj','low_adj','open_adj','volume_adj','vwap_adj']
 C_list = ['close','close_adj','high_adj','low_adj','open_adj','volume_adj','vwap_adj']
 D_list = ['close','close_adj','high_adj','low_adj','open_adj','volume_adj','vwap_adj']
-a_list = [15,30,45]
-b_list = [15,30,45]
-c_list = [15,30,45]
-d_list = [15,30,45]
-e_list = [15,30,45]
+a_list = [10,30]
+b_list = [10,30]
+c_list = [10,25,40]
+d_list = [10,25,40]
+e_list = [10,25,40]
 paraLists =[]
 paraLists.append(A_list)
 paraLists.append(B_list)
 paraLists.append(C_list)
-#paraLists.append(D_list)
+paraLists.append(D_list)
 paraLists.append(a_list)
-paraLists.append(b_list)
+#paraLists.append(b_list)
 #paraLists.append(c_list)
 #paraLists.append(d_list)
 #paraLists.append(e_list)
@@ -118,7 +118,7 @@ paraRows = list(itertools.product(*paraLists))
 
 paraRows_select = []
 for p in paraRows:
-    if p[1] != p[2]: #删除某些参数组，条件自定
+    if p[2] != p[1]: #删除某些参数组，条件自定
         paraRows_select.append(p)
 '''
 '''
@@ -126,7 +126,7 @@ for p in paraRows:
 calma_result = pd.DataFrame()
 for i,p in enumerate(paraRows_select):
 
-    factor_tmp = f(Dataslide[p[0]],Dataslide[p[1]],Dataslide[p[2]],p[3],p[4]) #不同因子要修改
+    factor_tmp = f(Dataslide[p[0]],Dataslide[p[1]],Dataslide[p[2]],Dataslide[p[3]],p[4]) #不同因子要修改
 
     [calma, Retdf] = fitness_func(factor_tmp, yizi,RawRet)
     calma_result.loc[i, 'calma'] = calma
